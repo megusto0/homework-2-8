@@ -4,18 +4,16 @@ import com.example.homework28.exception.EmployeeAlreadyAddedException;
 import com.example.homework28.exception.EmployeeNotFoundException;
 import com.example.homework28.exception.EmployeeStorageIsFullException;
 import com.example.homework28.model.Employee;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
+@Component
 @Service
 public class EmployeeService {
     private final static int SIZE = 5;
-    private final List<Employee> employees;
+     final List<Employee> employees;
 
     public EmployeeService() {
         this.employees = new ArrayList<>();
@@ -55,28 +53,4 @@ public class EmployeeService {
 
     }
 
-    public Employee findMaxSalary(String department) {
-        return employees.stream()
-                .filter(e -> e.getDepartment().equals(department))
-                .max(Comparator.comparing(Employee::getSalary))
-                .orElseThrow(EmployeeNotFoundException::new);
-    }
-
-    public Employee findMinSalary(String department) {
-        return employees.stream()
-                .filter(e -> e.getDepartment().equals(department))
-                .min(Comparator.comparing(Employee::getSalary))
-                .orElseThrow(EmployeeNotFoundException::new);
-    }
-
-    public List<Employee> all(String department) {
-        return employees.stream()
-                .filter(e -> e.getDepartment().equals(department))
-                .collect(Collectors.toList());
-    }
-
-    public Map<String, List<Employee>> getAll() {
-        return employees.stream()
-                .collect(Collectors.groupingBy(Employee::getDepartment));
-    }
 }

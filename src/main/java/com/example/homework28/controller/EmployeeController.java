@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
@@ -40,7 +41,6 @@ public class EmployeeController {
                          @RequestParam("departmentId") String department) {
         return employeeService.findEmployee(name, surname, salary, department);
     }
-
 
 }
 
