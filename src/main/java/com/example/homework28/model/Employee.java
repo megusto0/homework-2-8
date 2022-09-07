@@ -22,12 +22,15 @@ public class Employee {
     public String getName() {
         return name;
     }
+
     public String getSurName() {
         return surName;
     }
+
     public int getSalary() {
         return Integer.parseInt(salary);
     }
+
     public String getDepartment() {
         return department;
     }

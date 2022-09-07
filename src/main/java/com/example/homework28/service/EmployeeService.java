@@ -7,14 +7,14 @@ import com.example.homework28.model.Employee;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
-    private static int SIZE = 5;
+    private final static int SIZE = 5;
     private final List<Employee> employees;
 
     public EmployeeService() {
@@ -37,7 +37,8 @@ public class EmployeeService {
 
     public Employee removeEmployee(String name, String surname, String salary, String department) {
         Employee employee = new Employee(name, surname, salary, department);
-        if (!employees.contains(employee)) {
+        if (employees.contains(employee)) {
+            employees.remove(employee);
             return employee;
         }
         throw new EmployeeNotFoundException();
@@ -48,7 +49,6 @@ public class EmployeeService {
     public Employee findEmployee(String name, String surname, String salary, String department) {
         Employee employee = new Employee(name, surname, salary, department);
         if (employees.contains(employee)) {
-            employees.remove(employee);
             return employee;
         }
         throw new EmployeeNotFoundException();
@@ -59,14 +59,14 @@ public class EmployeeService {
         return employees.stream()
                 .filter(e -> e.getDepartment().equals(department))
                 .max(Comparator.comparing(Employee::getSalary))
-                .get();
+                .orElseThrow(EmployeeNotFoundException::new);
     }
 
     public Employee findMinSalary(String department) {
         return employees.stream()
                 .filter(e -> e.getDepartment().equals(department))
                 .min(Comparator.comparing(Employee::getSalary))
-                .get();
+                .orElseThrow(EmployeeNotFoundException::new);
     }
 
     public List<Employee> all(String department) {
@@ -75,7 +75,8 @@ public class EmployeeService {
                 .collect(Collectors.toList());
     }
 
-    public List<Employee> getAll() {
-        return Collections.unmodifiableList(employees);
+    public Map<String, List<Employee>> getAll() {
+        return employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment));
     }
 }
