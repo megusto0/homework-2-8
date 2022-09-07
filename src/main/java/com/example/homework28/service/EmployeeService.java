@@ -26,7 +26,6 @@ public class EmployeeService {
         }
         if (employees.size() < SIZE) {
             employees.add(employee);
-            employees.add(employee);
             return employee;
         }
         throw new EmployeeStorageIsFullException();
