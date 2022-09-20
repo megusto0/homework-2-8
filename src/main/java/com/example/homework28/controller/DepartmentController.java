@@ -33,9 +33,5 @@ public class DepartmentController {
     public List<Employee> all(@RequestParam("departmentId") String department) {
         return departmentService.all(department);
     }
-    @GetMapping()
-    public Map<String, List<Employee>> getAll() {
-        return departmentService.getAll();
-    }
 
 }

@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Component
 @Service
 public class EmployeeService {
@@ -51,5 +54,16 @@ public class EmployeeService {
         throw new EmployeeNotFoundException();
 
     }
+
+    public Map<String, List<Employee>> getAll() {
+        return employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment));
+    }
+
+    public List<Employee> getList() {
+        return employees;
+    }
+
+
 
 }
