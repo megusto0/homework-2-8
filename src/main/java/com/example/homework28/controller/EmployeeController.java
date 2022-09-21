@@ -45,10 +45,6 @@ public class EmployeeController {
         return employeeService.findEmployee(name, surname, salary, department);
     }
 
-    @GetMapping()
-    public Map<String, List<Employee>> getAll() {
-        return employeeService.getAll();
-    }
 
 }
 

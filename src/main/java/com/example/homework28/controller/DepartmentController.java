@@ -29,9 +29,12 @@ public class DepartmentController {
         return departmentService.findMinSalary(department);
     }
 
-    @GetMapping("/all")
-    public List<Employee> all(@RequestParam("departmentId") String department) {
-        return departmentService.all(department);
+    @GetMapping(value = "/all", params = "departmentId")
+    public List<Employee> findEmployeesFromDepartment(@RequestParam("departmentId") String department) {
+        return departmentService.findEmployeesFromDepartment(department);
     }
+    @GetMapping("/all")
+    public Map<String, List<Employee>> findEmployees() {return departmentService.findEmployees();}
+
 
 }

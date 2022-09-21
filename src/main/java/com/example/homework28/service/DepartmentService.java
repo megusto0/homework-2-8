@@ -5,7 +5,6 @@ import com.example.homework28.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -33,10 +32,17 @@ public class DepartmentService {
                 .orElseThrow(EmployeeNotFoundException::new);
     }
 
-    public List<Employee> all(String department) {
+    public List<Employee> findEmployeesFromDepartment(String department) {
         return employeeService.getList().stream()
                 .filter(e -> e.getDepartment().equals(department))
                 .collect(Collectors.toList());
     }
+
+    public Map<String, List<Employee>> findEmployees() {
+        return employeeService.getList().stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment));
+    }
+
+
 
 }

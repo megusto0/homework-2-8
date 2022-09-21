@@ -55,11 +55,6 @@ public class EmployeeService {
 
     }
 
-    public Map<String, List<Employee>> getAll() {
-        return employees.stream()
-                .collect(Collectors.groupingBy(Employee::getDepartment));
-    }
-
     public List<Employee> getList() {
         return employees;
     }
