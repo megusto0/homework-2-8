@@ -2,7 +2,6 @@ package com.example.homework28.service;
 
 import com.example.homework28.exception.EmployeeNotFoundException;
 import com.example.homework28.model.Employee;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -12,8 +11,7 @@ import java.util.stream.Collectors;
 @Service
 public class DepartmentService {
     private final EmployeeService employeeService;
-    @Autowired
-    public DepartmentService(List<Employee> employees, EmployeeService employeeService) {
+    public DepartmentService(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 

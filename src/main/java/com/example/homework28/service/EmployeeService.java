@@ -4,19 +4,16 @@ import com.example.homework28.exception.EmployeeAlreadyAddedException;
 import com.example.homework28.exception.EmployeeNotFoundException;
 import com.example.homework28.exception.EmployeeStorageIsFullException;
 import com.example.homework28.model.Employee;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
-@Component
+
 @Service
 public class EmployeeService {
     private final static int SIZE = 5;
-     final List<Employee> employees;
+    private final List<Employee> employees;
 
     public EmployeeService() {
         this.employees = new ArrayList<>();
